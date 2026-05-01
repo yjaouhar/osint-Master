@@ -13,7 +13,7 @@ async def run(input,output):
 
         print(content)
         if output:
-            out.export_json(content,output)
+            out.export_output(content,output)
             print(f"Data saved in {output}")
     else:
         print("Error : Ip not valid '"+input+"'")

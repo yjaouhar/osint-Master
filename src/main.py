@@ -21,6 +21,7 @@ args = parser.parse_args()
 if args.ip:
     asyncio.run(ip.run(args.ip, args.output))
 elif args.username:
-    username.run(args.username, args.output)
+    asyncio.run(username.run(args.username, args.output))
 elif args.domain:
-    domain.run(args.domain, args.output)
+    asyncio.run(domain.run(args.domain, args.output)
+)

@@ -40,26 +40,4 @@ async def check_blacklist(session, ip):
     if result.get("Answer"):
         return {"blacklisted": True, "source": "Spamhaus"}
     return {"blacklisted": False}
-#         {
-#   "Status": 3,
-#   "TC": false,
-#   "RD": true,
-#   "RA": true,
-#   "AD": false,
-#   "CD": false,
-#   "Question": [
-#     {
-#       "name": "170.252.144.154.zen.spamhaus.org.",
-#       "type": 1
-#     }
-#   ],
-#   "Authority": [
-#     {
-#       "name": "zen.spamhaus.org.",
-#       "type": 6,
-#       "TTL": 10,
-#       "data": "need.to.know.only. hostmaster.spamhaus.org. 2604301455 3600 600 432000 10"
-#     }
-#   ],
-#   "Comment": "Response from 2a05:9403::26e."
-# }
+

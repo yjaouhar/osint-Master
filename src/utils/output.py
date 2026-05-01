@@ -1,5 +1,5 @@
 from config import constants as const
-
+import json
 
 
 def format_result(data):
@@ -29,17 +29,17 @@ def format_result(data):
         blacklist_text = "Clean"
 
     return f"""
-ISP: {isp}
-City: {city}
-Country: {country}
-ASN: {asn}
-Known Issues: {abuse_text}
-Blacklist: {blacklist_text}
-""".strip()
+        ISP: {isp}
+        City: {city}
+        Country: {country}
+        ASN: {asn}
+        Known Issues: {abuse_text}
+        Blacklist: {blacklist_text}
+        """.strip()
 
 
 
-def export_json(data, filename):
+def export_output(data, filename):
     const.OUTPUT_DIR.mkdir(exist_ok=True)
     file_path = const.OUTPUT_DIR / filename
     file_path.write_text(data)
