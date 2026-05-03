@@ -5,6 +5,7 @@ async def fetch(session, url, headers=None, params=None):
         async with session.get(url, headers=headers, params=params, timeout=10) as resp:
             return await resp.json()
     except Exception as e:
+        # Return a consistent payload shape so callers can still use .get() safely.
         return {"error": str(e)}
     
 
@@ -26,5 +27,4 @@ async def get_abuse(session, ip):
     }
 
     return await fetch(session, url, headers=headers, params=params)
-
 

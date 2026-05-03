@@ -19,6 +19,7 @@ async def sub_domain(session,domain):
                 soup = BeautifulSoup(await r.text(), "html.parser")
                 for td in soup.find_all("td"):
                     txt = td.text.strip().lower()
+                    # RapidDNS returns many table cells, so keep only real subdomains of the target.
                     if txt.endswith(domain) and "*" not in txt:
                         subs.add(txt)
     except:
@@ -92,6 +93,7 @@ async def check_takeover(session, domain):
         for cname in cnames:
             cname = str(cname)
             for pattern, service in SERVICES.items():
+                # Map the CNAME target to a provider profile before checking the HTTP fingerprint.
                 if pattern in cname:
                     matched_service = service
                     break
@@ -112,6 +114,7 @@ async def check_takeover(session, domain):
             allow_redirects=True
         ) as r:
             body = await r.text()
+            # A provider-specific error page is the signal that the DNS record may be dangling.
             if matched_service["fingerprint"].lower() in body.lower():
                 return matched_service["name"]
     except:

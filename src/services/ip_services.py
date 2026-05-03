@@ -3,6 +3,7 @@ import asyncio
 import aiohttp
 async def load_data(ip):
     async with aiohttp.ClientSession() as session:
+        # Run both external lookups together so the CLI waits for one network round trip.
         tasks = [
             http.get_ipinfo(session, ip),
             http.get_abuse(session, ip),
@@ -10,6 +11,7 @@ async def load_data(ip):
 
         geo, abuse = await asyncio.gather(*tasks)
 
+        # Keep a flat dictionary here because the output formatter expects normalized keys.
         return {
             "ip": str(ip),
             "country": geo.get("country"),
@@ -20,5 +22,4 @@ async def load_data(ip):
             "total_reports": abuse.get("data", {}).get("totalReports"),
         }
         
-
 

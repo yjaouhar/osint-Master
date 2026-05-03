@@ -3,7 +3,7 @@ import json
 
 
 def format_result(data):
-    
+    # ipinfo returns the ASN and provider in one field like "AS123 Example ISP".
     org = data.get("isp", "")
     parts = org.split(" ", 1) if org else []
     asn = parts[0] if parts else "Unknown"
@@ -37,6 +37,7 @@ def format_output(domain, results):
         lines.append(f"  - {r['sub']} (IP: {r['ip']})")
         lines.append(f"    SSL Certificate: {r['ssl']}")
     
+    # Only keep subdomains that matched a known provider fingerprint during takeover checks.
     risks = [r for r in results if r["risk"]]
     lines.append("\nPotential Subdomain Takeover Risks:")
     if risks:

@@ -6,15 +6,19 @@ from core import domain_enum as domain
 
 
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(
+    description="Welcome to osintmaster multi-function Tool",
+    formatter_class=argparse.RawTextHelpFormatter
+)
 
-group = parser.add_mutually_exclusive_group(required=True)
+group = parser.add_argument_group("OPTIONS")
 
-group.add_argument("-i", "--ip", help="IP address" )
-group.add_argument("-u", "--username", help="Username")
-group.add_argument("-d", "--domain", help="Domain")
+group.add_argument("-i", "--ip", help='Search information by IP address')
+group.add_argument("-u", "--username", help='Search information by username')
+group.add_argument("-d", "--domain", help='Enumerate subdomains and check for takeover risks')
+group.add_argument("-o", "--output", help='File name to save output')
 
-parser.add_argument("-o", "--output", help="Output file")
+args = parser.parse_args()
 
 args = parser.parse_args()
 if args.ip:
