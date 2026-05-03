@@ -17,11 +17,9 @@ group.add_argument("-d", "--domain", help="Domain")
 parser.add_argument("-o", "--output", help="Output file")
 
 args = parser.parse_args()
-
 if args.ip:
     asyncio.run(ip.run(args.ip, args.output))
 elif args.username:
     asyncio.run(username.run(args.username, args.output))
 elif args.domain:
-    asyncio.run(domain.run(args.domain, args.output)
-)
+    asyncio.run(domain.run(args.domain, args.output))

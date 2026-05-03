@@ -8,10 +8,16 @@ def parse_description(content):
     key = "Instagram: "
     start = content.index(key)
     bio = content[start+len(key):]
-    return {
-        "followers": followers.group(1) if followers else None,
-        "following": following.group(1) if following else None,
-        "posts": posts.group(1) if posts else None,
-        "full_name" : full_name.group(1) if full_name else None,
-        "bio" : bio
-    }
+    return f"""
+                - followers: {followers.group(1) if followers else None}
+                - following: {following.group(1) if following else None}
+                - posts: {posts.group(1) if posts else None}
+                - full_name : {full_name.group(1) if full_name else None}
+                - bio : {bio}
+"""
+
+def not_found(platform:str):
+    return f"""
+        - {platform}
+            - found: False
+""" 

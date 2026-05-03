@@ -6,10 +6,10 @@ async def load_data(ip):
         tasks = [
             http.get_ipinfo(session, ip),
             http.get_abuse(session, ip),
-            http.check_blacklist(session, ip)
         ]
 
-        geo, abuse, blacklist = await asyncio.gather(*tasks)
+        geo, abuse = await asyncio.gather(*tasks)
+
         return {
             "ip": str(ip),
             "country": geo.get("country"),
@@ -18,8 +18,6 @@ async def load_data(ip):
             "location": geo.get("loc"),
             "abuse_score": abuse.get("data", {}).get("abuseConfidenceScore"),
             "total_reports": abuse.get("data", {}).get("totalReports"),
-            "blacklist": blacklist.get("blacklisted"),
-            "source" : blacklist.get("source")
         }
         
 

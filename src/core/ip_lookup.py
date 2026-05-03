@@ -8,7 +8,7 @@ async def run(input,output):
 
     ip = validators.ip_validate(input)
     if ip:
-        data = await service.load_data(ip)
+        data = await service.load_data(str(ip))
         content = out.format_result(data)
 
         print(content)

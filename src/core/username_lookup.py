@@ -7,4 +7,5 @@ async def run(username , output):
             print(data)
             if output:
                 out.export_output(str(data),output)
+                print(f"Data saved in {output}")
             
