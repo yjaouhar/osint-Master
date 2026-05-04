@@ -47,6 +47,7 @@ def get_ssl(domain):
             return f"Valid until {date.strftime('%Y-%m-%d')}"
     except:
         return "Not found"
+    
 SERVICES = {
     "amazonaws.com": {
         "name": "AWS S3 bucket",

@@ -3,17 +3,17 @@ from utils import output as out
 
 from services import ip_services as service
 
-
-async def run(input,output):
+# Define an asynchronous function that takes user input (expected to be an IP)
+async def run(input):
 
     ip = validators.ip_validate(input)
-    if ip:
-        data = await service.load_data(str(ip))
-        content = out.format_result(data)
 
-        print(content)
-        if output:
-            out.export_output(content,output)
-            print(f"Data saved in {output}")
+    if ip:
+        # Call an async function to fetch data related to the IP
+        # (likely from an API or database)
+        data = await service.load_data(str(ip))
+
+        return out.format_result(data)
+
     else:
-        print("Error : Ip not valid '"+input+"'")
+        print("Error : Ip not valid '" + input + "'")
